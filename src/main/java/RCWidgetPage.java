@@ -18,6 +18,9 @@ public class RCWidgetPage extends TestPage {
 	By rc_phone_button = By.id("rc-phone-button");
 	By rc_phone_input_warning = By.id("rc-phone-input-warning");
 
+	public RCWidgetPage(WebDriver firefoxDriver) {
+		super(firefoxDriver);
+	}
 
 	@Step("открытие виджета")
 	public void clickWidgetButton() {
