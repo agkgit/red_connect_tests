@@ -1,3 +1,4 @@
+import org.omg.CORBA.StringHolder;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
@@ -21,7 +22,15 @@ public class DriverFactory {
 				break;
 
 			case CHROME:
-				System.setProperty("webdriver.chrome.driver", "src/main/resources/drivers/chromedriver_win32/chromedriver.exe");
+
+				String localDriver = null;
+				//путь к ChromeDriver в зависимости от ОС и разрядности
+				if (isWindows())	{ localDriver = "src/main/resources/drivers/chromedriver_win32/chromedriver.exe"; }
+				else if (isMac())	{ localDriver = "src/main/resources/drivers/chromedriver_mac32/chromedriver"; }
+				else if (is64bit())	{ localDriver ="src/main/resources/drivers/chromedriver_linux64/chromedriver"; }
+				else { localDriver ="src/main/resources/drivers/chromedriver_linux32/chromedriver"; }
+
+				System.setProperty("webdriver.chrome.driver", localDriver);
 				driver = new ChromeDriver();
 				break;
 
@@ -36,4 +45,36 @@ public class DriverFactory {
 		return driver;
 
 	}
+
+//Проверка версии ОС------------------------------
+	public static boolean isWindows(){
+
+		String os = System.getProperty("os.name").toLowerCase();
+		//windows
+		return (os.indexOf( "win" ) >= 0);
+
+	}
+	public static boolean isMac(){
+
+		String os = System.getProperty("os.name").toLowerCase();
+		//Mac
+		return (os.indexOf( "mac" ) >= 0);
+
+	}
+	public static boolean isUnix(){
+
+		String os = System.getProperty("os.name").toLowerCase();
+		//linux or unix
+		return (os.indexOf( "nix") >=0 || os.indexOf( "nux") >=0);
+
+	}
+//------------------------------------------------
+
+//Проверка архитектуры----------------------------
+	public static boolean is64bit() {
+
+		String arch = System.getProperty("os.arch").toLowerCase();
+		//linux or unix
+		return (arch.indexOf("64") >= 0}
+//------------------------------------------------
 }

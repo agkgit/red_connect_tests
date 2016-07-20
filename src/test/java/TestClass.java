@@ -29,7 +29,9 @@ public class TestClass {
 
 	@Test
 	public void mainTest() throws InterruptedException {
+
 		WebDriver driver = DriverFactory.getDriver(DriverFactory.BrowserType.PHANTOMJS);
+
 		My cabinet = new My(driver, false);
 		cabinet.manage(5, 5);
 		cabinet.openMy();
@@ -42,11 +44,13 @@ public class TestClass {
 
 		RCWidgetPage rcWidgetPage = new RCWidgetPage(DriverFactory.getDriver(DriverFactory.BrowserType.CHROME));
 
+		rcWidgetPage.manage(5, 5);
 		rcWidgetPage.openSite("http://vernee.ru/qa");
 		rcWidgetPage.clickWidgetButton();
 		rcWidgetPage.inputNumber("79999864875");
 		rcWidgetPage.clickThePhoneButton();
 		rcWidgetPage.waitPhoneDialElements();
 		rcWidgetPage.close();
+
 	}
 }
