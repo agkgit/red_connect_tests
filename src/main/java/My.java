@@ -72,7 +72,6 @@ public class My extends TestPage {
 		//установка переменных типа By
 		BY_DELETE_PHONE			= By.xpath( property.getProperty("BY_DELETE_PHONE") );
 		BY_DO_DELETE_PHONE_YES	= By.xpath( property.getProperty("BY_DO_DELETE_PHONE_YES") );
-		BY_ADD_NUMBER			= By.xpath( property.getProperty("BY_ADD_NUMBER") );
 		BY_REDCONNECT_MENU		= By.xpath( property.getProperty("BY_REDCONNECT_MENU") );
 		BY_BUSINESS_TARIFF		= By.xpath( property.getProperty("BY_BUSINESS_TARIFF") );
 		BY_FREE_TARIFF			= By.xpath( property.getProperty("BY_FREE_TARIFF") );
@@ -89,6 +88,7 @@ public class My extends TestPage {
 			BY_START_WORK_TIME		= By.xpath( property.getProperty("BY_START_WORK_TIME_Test") );
 			BY_STOP_WORK_TIME		= By.xpath( property.getProperty("BY_STOP_WORK_TIME_Test") );
 			BY_SAVE_SETTINGS		= By.xpath( property.getProperty("BY_SAVE_SETTINGS_Test") );
+			BY_ADD_NUMBER			= By.xpath( property.getProperty("BY_ADD_NUMBER_Test") );
 
 		} else {
 			this.urlMy		= property.getProperty("urlMyProd");
@@ -100,6 +100,8 @@ public class My extends TestPage {
 			BY_START_WORK_TIME		= By.xpath( property.getProperty("BY_START_WORK_TIME_Prod") );
 			BY_STOP_WORK_TIME		= By.xpath( property.getProperty("BY_STOP_WORK_TIME_Prod") );
 			BY_SAVE_SETTINGS		= By.xpath( property.getProperty("BY_SAVE_SETTINGS_Prod") );
+			BY_ADD_NUMBER			= By.xpath( property.getProperty("BY_ADD_NUMBER_Prod") );
+
 		}
 	}
 	public My(boolean isTestEnvironment) { this(new FirefoxDriver(), isTestEnvironment); }
@@ -153,6 +155,7 @@ public class My extends TestPage {
 	@Step("установка оператора")
 	public void setOperator(RCOperator operator) {
 
+		this.wait(BY_ADD_NUMBER, 5, "не найден BY_ADD_NUMBER");
 		driver.findElement(BY_ADD_NUMBER).click();
 
 		this.wait(BY_NUMBER_IMPUT, "не найден BY_NUMBER_IMPUT");

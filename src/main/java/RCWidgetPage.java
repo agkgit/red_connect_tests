@@ -63,12 +63,13 @@ public class RCWidgetPage extends TestPage {
 	@Step("ожидания при состоявшемся звонке")
 	public void waitPhoneDialElements() {
 
-		this.wait(By.id("rc-phone-dial"), 3);
-		this.wait(By.id("rc-phone-dial-snake"), 3);
-		this.wait(By.id("rc-phone-dial-snake-curtain"), 3);
-		this.wait(By.id("rc-phone-dial-snake-curtain2"),3);
-		this.wait(By.id("rc-phone-dial-half-circle"), 3);
-		this.wait(By.id("rc-phone-dial-circle"), 3);
+//		this.wait(By.id("rc-phone-dial"), 1);
+//		this.wait(By.id("rc-phone-dial-snake"), 1);
+//		this.wait(By.id("rc-phone-dial-snake-curtain"), 1);
+//		this.wait(By.id("rc-phone-dial-snake-curtain2"),1);
+//		this.wait(By.id("rc-phone-dial-half-circle"), 1);
+//		this.wait(By.id("rc-phone-dial-circle"), 1);
+		this.wait(By.id("rc-phone-dial-fail"), 300);
 	}
 
 }
