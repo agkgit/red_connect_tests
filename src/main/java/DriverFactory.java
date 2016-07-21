@@ -75,6 +75,7 @@ public class DriverFactory {
 
 		String arch = System.getProperty("os.arch").toLowerCase();
 		//linux or unix
-		return (arch.indexOf("64") >= 0}
+		return (arch.indexOf("64") >= 0);
+	}
 //------------------------------------------------
 }

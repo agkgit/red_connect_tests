@@ -7,6 +7,7 @@ import ru.yandex.qatools.allure.annotations.Step;
 
 import java.util.Date;
 
+import static org.testng.Assert.assertThrows;
 import static org.testng.Assert.fail;
 
 public class RCWidgetPage extends TestPage {
@@ -24,16 +25,16 @@ public class RCWidgetPage extends TestPage {
 
 	@Step("открытие виджета")
 	public void clickWidgetButton() {
-		this.wait(rc_phone);
+		this.wait(rc_phone, "не найден элемент rc_phone");
 		driver.findElement(rc_phone).click();
 	}
 
 	@Step("ввод номера")
 	public void inputNumber(String number) {
-		this.wait(rc_connector_frame);
+		this.wait(rc_connector_frame, "не найден элемент rc_connector_frame");
 		driver.switchTo().frame(driver.findElement(rc_connector_frame));
 
-		this.wait(rc_phone_input);
+		this.wait(rc_phone_input, "не найден элемент rc_phone_input");
 		WebElement rcPhoneInput = driver.findElement(rc_phone_input);
 
 		rcPhoneInput.clear();
@@ -44,12 +45,14 @@ public class RCWidgetPage extends TestPage {
 	@Step("нажатие кнопки \"Позвонить\"")
 	public void clickThePhoneButton() {
 
-		try {
-			WebElement byWidgetButton = (new WebDriverWait(driver, 1))
-					.until(ExpectedConditions.presenceOfElementLocated(rc_phone_button));
-		} catch (TimeoutException e) {
-			fail("rc_connector_frame недоступен");
-		}
+		this.wait(rc_phone_button, "не найден элемент rc_phone_button");
+
+//		try {
+//			WebElement byWidgetButton = (new WebDriverWait(driver, 1))
+//					.until(ExpectedConditions.presenceOfElementLocated(rc_phone_button));
+//		} catch (TimeoutException e) {
+//			fail("rc_connector_frame недоступен");
+//		}
 
 		driver.findElement(rc_phone_button).click();
 	}
