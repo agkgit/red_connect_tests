@@ -11,6 +11,9 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="library" name="Java EE 6-Java EE 6" level="project" />
+    <orderEntry type="library" name="Maven: javax.mail:mail:1.4" level="project" />
+    <orderEntry type="library" name="Maven: javax.activation:activation:1.1" level="project" />
     <orderEntry type="library" name="Maven: ru.yandex.qatools.allure:allure-testng-adaptor:1.4.23" level="project" />
     <orderEntry type="library" name="Maven: ru.yandex.qatools.allure:allure-java-aspects:1.4.23" level="project" />
     <orderEntry type="library" name="Maven: ru.yandex.qatools.allure:allure-java-adaptor-api:1.4.23" level="project" />
