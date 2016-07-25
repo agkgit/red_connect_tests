@@ -27,20 +27,11 @@ import static org.testng.Assert.fail;
 
 public class My extends TestPage {
 
-	public static final String MY_URL = "http://test.redhelper.ru/my/redconnect";
-
 	// константы типа By
-	public final By BY_DELETE_PHONE;
-	public final By BY_DO_DELETE_PHONE_YES;
-	public final By BY_ADD_NUMBER;
-	public final By BY_NUMBER_IMPUT;
-	public final By BY_ADD_WORK_TIME;
-	public final By BY_START_WORK_TIME;
-	public final By BY_STOP_WORK_TIME;
-	public final By BY_SAVE_SETTINGS;
-	public final By BY_REDCONNECT_MENU;
-	public final By BY_BUSINESS_TARIFF;
-	public final By BY_FREE_TARIFF;
+	public final By		BY_DELETE_PHONE,		BY_DO_DELETE_PHONE_YES,		BY_ADD_NUMBER,
+						BY_NUMBER_IMPUT,		BY_ADD_WORK_TIME,			BY_START_WORK_TIME,
+						BY_STOP_WORK_TIME,		BY_SAVE_SETTINGS,			BY_REDCONNECT_MENU,
+						BY_BUSINESS_TARIFF,		BY_FREE_TARIFF;
 
 	String login, password;
 	String urlMy;
