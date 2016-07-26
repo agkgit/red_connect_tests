@@ -1,9 +1,16 @@
 import org.omg.CORBA.StringHolder;
+import org.openqa.selenium.Capabilities;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxProfile;
 import org.openqa.selenium.phantomjs.PhantomJSDriver;
+import org.openqa.selenium.phantomjs.PhantomJSDriverService;
+import org.openqa.selenium.remote.DesiredCapabilities;
+
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class DriverFactory {
 
@@ -37,7 +44,15 @@ public class DriverFactory {
 				break;
 
 			case PHANTOMJS:
-				driver = new PhantomJSDriver();
+
+				//отключение логирование браузера в консоль
+				DesiredCapabilities caps = new DesiredCapabilities();
+				ArrayList<String> cliArgsCap = new ArrayList<String>();
+				cliArgsCap.add("--webdriver-loglevel=NONE");
+				caps.setCapability(PhantomJSDriverService.PHANTOMJS_CLI_ARGS, cliArgsCap);
+				Logger.getLogger(PhantomJSDriverService.class.getName()).setLevel(Level.OFF);
+
+				driver = new PhantomJSDriver(caps);
 				driver.manage().deleteAllCookies();
 				break;
 
@@ -71,8 +86,6 @@ public class DriverFactory {
 		return (os.indexOf( "nix") >=0 || os.indexOf( "nux") >=0);
 
 	}
-//------------------------------------------------
-
 //Проверка архитектуры----------------------------
 	public static boolean is64bit() {
 
