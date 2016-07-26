@@ -13,11 +13,11 @@ import static org.testng.Assert.fail;
 public class RCWidgetPage extends TestPage {
 
 	//элементы виджета на тестируемой странице
-	By rc_phone = By.id("rc-phone");
-	By rc_connector_frame = By.className("rc-connector-frame");
-	By rc_phone_input = By.id("rc-phone-input");
-	By rc_phone_button = By.id("rc-phone-button");
-	By rc_phone_input_warning = By.id("rc-phone-input-warning");
+	By rc_phone					= By.id("rc-phone");
+	By rc_connector_frame		= By.className("rc-connector-frame");
+	By rc_phone_input			= By.id("rc-phone-input");
+	By rc_phone_button			= By.id("rc-phone-button");
+	By rc_phone_input_warning	= By.id("rc-phone-input-warning");
 
 	public RCWidgetPage(WebDriver firefoxDriver) {
 		super(firefoxDriver);
@@ -31,7 +31,7 @@ public class RCWidgetPage extends TestPage {
 
 	@Step("ввод номера")
 	public void inputNumber(String number) {
-		this.wait(rc_connector_frame, "не найден элемент rc_connector_frame");
+		this.wait(rc_connector_frame, 10, "не найден элемент rc_connector_frame");
 		driver.switchTo().frame(driver.findElement(rc_connector_frame));
 
 		this.wait(rc_phone_input, "не найден элемент rc_phone_input");

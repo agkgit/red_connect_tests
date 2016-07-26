@@ -19,6 +19,7 @@ public class DriverFactory {
 				FirefoxProfile firefoxProfile = new FirefoxProfile();
 				firefoxProfile.setPreference("browser.private.browsing.autostart", true);
 				driver = new FirefoxDriver(firefoxProfile);
+				driver.manage().deleteAllCookies();
 				break;
 
 			case CHROME:
@@ -28,14 +29,16 @@ public class DriverFactory {
 				if (isWindows())	{ localDriver = "src/main/resources/drivers/chromedriver_win32/chromedriver.exe"; }
 				else if (isMac())	{ localDriver = "src/main/resources/drivers/chromedriver_mac32/chromedriver"; }
 				else if (is64bit())	{ localDriver ="src/main/resources/drivers/chromedriver_linux64/chromedriver"; }
-				else { localDriver ="src/main/resources/drivers/chromedriver_linux32/chromedriver"; }
+				else				{ localDriver ="src/main/resources/drivers/chromedriver_linux32/chromedriver"; }
 
 				System.setProperty("webdriver.chrome.driver", localDriver);
 				driver = new ChromeDriver();
+				driver.manage().deleteAllCookies();
 				break;
 
 			case PHANTOMJS:
 				driver = new PhantomJSDriver();
+				driver.manage().deleteAllCookies();
 				break;
 
 			default:

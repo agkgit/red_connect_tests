@@ -9,16 +9,7 @@ import java.util.concurrent.TimeUnit;
 public class PeriodTest {
 	public static void main(String[] args) throws InterruptedException {
 
-		WebDriver driver = DriverFactory.getDriver(DriverFactory.BrowserType.PHANTOMJS);
-		My cabinet = new My(driver, false);
-		cabinet.manage(5, 5);
-		cabinet.openMy();
-		cabinet.openRedConnectMenu();
-		cabinet.setBusinessTariff();
-		cabinet.deleteOperators();
-		cabinet.setOperator( new RCOperator("9999864875", "00:00", "00:00") );
-		cabinet.close();
-		System.out.println("Оператор установлен");
+		setOperatorForTestRC( new RCOperator("9999864875", "00:00", "00:00") );
 
 		Runnable task = () -> {
 
@@ -43,13 +34,25 @@ public class PeriodTest {
 
 	}
 
+
+	//установка оператора для testRC
+	private static void setOperatorForTestRC(RCOperator operator) {
+		WebDriver driver = DriverFactory.getDriver(DriverFactory.BrowserType.PHANTOMJS);
+		My cabinet = new My(driver, false);
+		cabinet.manage(5, 5);
+		cabinet.openMy();
+		cabinet.openRedConnectMenu();
+		cabinet.setBusinessTariff();
+		cabinet.deleteOperators();
+		cabinet.setOperator( operator );
+		cabinet.close();
+		System.out.println("Оператор установлен");
+	}
+
 	//тест сервиса RedConnect
 	private static void testRC() throws Exception {
 
 		try {
-
-			RCWidgetPage rcWidgetPage = new RCWidgetPage(DriverFactory.getDriver(DriverFactory.BrowserType.PHANTOMJS));
-			rcWidgetPage.manage(5, 5);
 
 			Properties property = new Properties();
 			FileInputStream fis;
@@ -60,6 +63,9 @@ public class PeriodTest {
 				System.err.println("ОШИБКА: Файл свойств отсуствует!");
 			}
 
+			RCWidgetPage rcWidgetPage = new RCWidgetPage(DriverFactory.getDriver(DriverFactory.BrowserType.FIREFOX));
+			rcWidgetPage.manage(5, 5);
+			rcWidgetPage.deleteAllCookies();
 			rcWidgetPage.openSite( property.getProperty("urlProdSite") );
 			rcWidgetPage.clickWidgetButton();
 			rcWidgetPage.inputNumber("79999864875");

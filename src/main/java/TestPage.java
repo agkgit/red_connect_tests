@@ -10,6 +10,7 @@ import org.testng.annotations.Test;
 import ru.yandex.qatools.allure.annotations.Step;
 
 import java.util.concurrent.TimeUnit;
+import java.util.logging.Level;
 
 import static org.testng.Assert.fail;
 
