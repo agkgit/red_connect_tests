@@ -69,7 +69,7 @@ public class TestPage {
 	}
 	@Step("ожидание элемента")
 	public void wait(By byElement, String failText) {
-		this.wait(byElement, 5, failText);
+		this.wait(byElement, 10, failText);
 	}
 	@Step("ожидание элемента")
 	public void wait(By byElement, int seconds) {
@@ -77,7 +77,7 @@ public class TestPage {
 	}
 	@Step("ожидание элемента")
 	public void wait(By byElement) {
-		this.wait(byElement, 5, "элемент не найден");
+		this.wait(byElement, 10, "элемент не найден");
 	}
 //---------------------------------------------------------------------------------------------------------
 

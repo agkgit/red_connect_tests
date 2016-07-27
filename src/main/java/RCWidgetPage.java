@@ -19,6 +19,7 @@ public class RCWidgetPage extends TestPage {
 	By rc_phone_button			= By.id("rc-phone-button");
 	By rc_phone_input_warning	= By.id("rc-phone-input-warning");
 
+	//конструктор
 	public RCWidgetPage(WebDriver firefoxDriver) {
 		super(firefoxDriver);
 	}
@@ -46,15 +47,8 @@ public class RCWidgetPage extends TestPage {
 	public void clickThePhoneButton() {
 
 		this.wait(rc_phone_button, "не найден элемент rc_phone_button");
-
-//		try {
-//			WebElement byWidgetButton = (new WebDriverWait(driver, 1))
-//					.until(ExpectedConditions.presenceOfElementLocated(rc_phone_button));
-//		} catch (TimeoutException e) {
-//			fail("rc_connector_frame недоступен");
-//		}
-
 		driver.findElement(rc_phone_button).click();
+
 	}
 
 	@Step("ожидание появления предупреждения 'Внимание! Проверьте правильность набранного номера'")
@@ -63,17 +57,26 @@ public class RCWidgetPage extends TestPage {
 		this.wait(rc_phone_input_warning, failText);
 	}
 
-	@Step("ожидания при состоявшемся звонке")
-	public void waitPhoneDialElements() {
+	@Step("ожидания элементов")
+	public void waitElementsOperatorVisitor(Boolean isOperatorAvailable, Boolean isVisitorAvailable) {
 
-		this.wait(By.id("rc-phone-form-close"));
-//		this.wait(By.id("rc-phone-dial"), 1);
-//		this.wait(By.id("rc-phone-dial-snake"), 1);
-//		this.wait(By.id("rc-phone-dial-snake-curtain"), 1);
-//		this.wait(By.id("rc-phone-dial-snake-curtain2"),1);
-//		this.wait(By.id("rc-phone-dial-half-circle"), 1);
-//		this.wait(By.id("rc-phone-dial-circle"), 1);
-//		this.wait(By.id("rc-phone-dial-fail"), 300);
+		if (isOperatorAvailable == false) {
+
+			this.wait(By.id("rc-phone-form-close"));
+			this.wait(By.id("rc-phone-dial"), 3);
+			this.wait(By.id("rc-phone-dial-snake"), 3);
+			this.wait(By.id("rc-phone-dial-snake-curtain"), 3);
+			this.wait(By.id("rc-phone-dial-snake-curtain2"), 3);
+			this.wait(By.id("rc-phone-dial-half-circle"), 3);
+			this.wait(By.id("rc-phone-dial-circle"), 3);
+			this.wait(By.id("rc-phone-dial-fail"), 300);
+
+		} else if (isVisitorAvailable) {
+
+			//ожидание при доступном операторе
+		} else {
+
+			//ожидания при недоступном операторе
+		}
 	}
-
 }

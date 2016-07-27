@@ -66,7 +66,7 @@ public class TestClass {
 		rcWidgetPage.clickWidgetButton();
 		rcWidgetPage.inputNumber("79999864875");
 		rcWidgetPage.clickThePhoneButton();
-		rcWidgetPage.waitPhoneDialElements();
+		rcWidgetPage.waitElementsOperatorVisitor(false, false);
 		rcWidgetPage.close();
 
 	}

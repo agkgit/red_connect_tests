@@ -99,12 +99,13 @@ public class My extends TestPage {
 
 
 	@Step("открытие личного кабинета")
-	public void openMy() {
-		this.openSite(urlMy);
-
+	public void openMy(String login, String password) {
 		driver.findElement(By.id("name")).sendKeys(login);
 		driver.findElement(By.id("password")).sendKeys(password);
 		driver.findElement(By.className("login-button")).click();
+	}
+	public void openMy() {
+		this.openMy(this.login, this.password);
 	}
 
 	@Step("открытие меню RedConnect")
