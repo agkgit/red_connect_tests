@@ -100,6 +100,7 @@ public class My extends TestPage {
 
 	@Step("открытие личного кабинета")
 	public void openMy(String login, String password) {
+		driver.get(urlMy);
 		driver.findElement(By.id("name")).sendKeys(login);
 		driver.findElement(By.id("password")).sendKeys(password);
 		driver.findElement(By.className("login-button")).click();
@@ -204,7 +205,5 @@ public class My extends TestPage {
 			i += 3;
 		}
 	}
-
-
 
 }
