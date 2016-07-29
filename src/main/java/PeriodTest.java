@@ -10,78 +10,92 @@ import java.util.concurrent.TimeUnit;
 public class PeriodTest {
 	public static void main(String[] args) throws InterruptedException {
 
-		//Runnable task1, task2, task3;
+		Runnable task1, task2, task3, task4;
 
 		//оператор недоступен
-		Runnable task1 = () -> {
-
-			setOperatorForTestRC("oldfree", "qweasd", new RCOperator("4824245255", "00:00", "00:00") );
-			System.out.println("ОШИБОЧКА!!!");
-
+		task1 = () -> {
+			setOperatorForTestRC(DriverFactory.BrowserType.CHROME ,"oldfree", "qweasd", new RCOperator("4824245255", "00:00", "00:00") );
 			int i = 0;
 			try {
 				for (;;) {
 					testRC("http://www.vernee.ru/oldfree", "79999864875", false, false);
-					System.out.println("task1: иттерация №" + ++i + " пройдена");
+					System.out.println(new Date().toString() + " task1: иттерация №" + ++i + "\tпройдена");
 					Thread.currentThread().sleep(5000);
 				}
 			} catch (Exception e) {
-				System.err.println(new Date().toString() + e);
+				System.err.println(new Date().toString() + " " + e);
 			}
 		};
 
+
 //--------------------------------------------------------------------------------------------------
-//		setOperatorForTestRC("rcfree", "qweasd", new RCOperator("4824245255", "00:00", "00:00") );
-//
-//		//оператор доступен, посетитель недоступен
-//		task2 = () -> {
-//
-//			int i = 0;
-//			try {
-//				for (;;) {
-//					testRC("http://www.vernee.ru/t", "79999864875", true, false);
-//					System.out.println(new Date().toString() + " task2: иттерация №" + ++i + "\tпройдена");
-//					Thread.currentThread().sleep(5000);
-//				}
-//			} catch (Exception e) {
-//				System.err.println(new Date().toString() + e);
-//			}
-//		};
-//		//оператор доступен, посетитель доступен
-//		task3 = () -> {
-//
-//			int i = 0;
-//			try {
-//				for (;;) {
-//					testRC("http://www.vernee.ru/t", "79999864875", true, true);
-//					System.out.println("task3: иттерация №" + ++i + " пройдена");
-//					Thread.currentThread().sleep(2000);
-//				}
-//			} catch (Exception e) {
-//				System.err.println(new Date().toString() + e);
-//			}
-//		};
+		setOperatorForTestRC(DriverFactory.BrowserType.CHROME, "rcfree", "qweasd", new RCOperator("9038099128", "00:00", "00:00") );
+
+		//оператор доступен, посетитель недоступен
+		task2 = () -> {
+
+			int i = 0;
+			try {
+				for (;;) {
+					testRC("http://www.tsyopa.ru/ark", "79094065104", true, false);
+					System.out.println(new Date().toString() + " task2: иттерация №" + ++i + "\tпройдена");
+					Thread.currentThread().sleep(5000);
+				}
+			} catch (Exception e) {
+				System.err.println(new Date().toString() + " " + e);
+			}
+		};
+
+		//оператор доступен, посетитель доступен
+		task3 = () -> {
+
+			int i = 0;
+			try {
+				for (;;) {
+					testRC("http://www.tsyopa.ru/ark", "79266588290", true, true);
+					System.out.println(new Date().toString() + " task3: иттерация №" + ++i + " пройдена");
+					Thread.currentThread().sleep(5000);
+				}
+			} catch (Exception e) {
+				System.err.println(new Date().toString() + " " + e);
+			}
+		};
+
+		task4 = () -> {
+
+			int i = 0;
+			try {
+				for (;;) {
+					RHWidgetPage rhWidgetPage = new RHWidgetPage();
+					rhWidgetPage.sendMessagesVisitorToOperator();
+					System.out.println(new Date().toString() + " task4: иттерация №" + ++i + " пройдена");
+				}
+			} catch (InterruptedException e) {
+				System.err.println(new Date().toString() + " " + e);
+			}
+		};
 //--------------------------------------------------------------------------------------------------
 
 		Thread thread1 = new Thread(task1);		thread1.start();
-//		Thread thread2 = new Thread(task2);		//thread2.start();
-//		Thread thread3 = new Thread(task3);		//thread3.start();
+		Thread thread2 = new Thread(task2);		thread2.start();
+		Thread thread3 = new Thread(task3);		thread3.start();
+		Thread thread4 = new Thread(task4);		thread4.start();
 
 	}
 
 
 	//установка оператора для testRC()
-	private static void setOperatorForTestRC(String login, String password, RCOperator operator) {
-		WebDriver driver = DriverFactory.getDriver(DriverFactory.BrowserType.PHANTOMJS);
+	private static void setOperatorForTestRC(DriverFactory.BrowserType browser, String login, String password, RCOperator operator) {
+		//WebDriver driver = DriverFactory.getDriver(DriverFactory.BrowserType.PHANTOMJS);
+		WebDriver driver = DriverFactory.getDriver(browser);
 		My cabinet = new My(driver, true);
-		cabinet.manage(5, 5);
+		cabinet.manage(15, 15);
 		cabinet.openMy(login, password);
 		cabinet.openRedConnectMenu();
-		cabinet.setBusinessTariff();
+		//cabinet.setBusinessTariff();
 		cabinet.deleteOperators();
 		cabinet.setOperator( operator );
 		cabinet.close();
-		System.out.println("Оператор установлен");
 	}
 
 	//тест сервиса RedConnect
@@ -114,7 +128,7 @@ public class PeriodTest {
 
 		} catch (Exception e) {
 			System.err.println(e);
-		}
+	}
 	}
 
 }

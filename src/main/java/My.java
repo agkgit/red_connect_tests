@@ -1,25 +1,17 @@
-import com.sun.deploy.Environment;
-import com.sun.deploy.security.ruleset.DRSHelper;
-import com.sun.org.apache.xpath.internal.operations.Bool;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import ru.yandex.qatools.allure.annotations.Step;
 
 import java.io.FileInputStream;
 import java.io.IOException;
-import java.io.OutputStream;
-import java.io.FileOutputStream;
 
 import java.lang.String;
-import java.util.List;
+import java.util.Date;
 import java.util.Properties;
-import java.util.concurrent.TimeUnit;
-import java.util.concurrent.TimeoutException;
 
 import static org.testng.Assert.fail;
 
@@ -101,8 +93,11 @@ public class My extends TestPage {
 	@Step("открытие личного кабинета")
 	public void openMy(String login, String password) {
 		driver.get(urlMy);
+		System.out.println(new Date().toString() + " driver.findElement(By.id(\"name\")).sendKeys(login);");
 		driver.findElement(By.id("name")).sendKeys(login);
+		System.out.println(new Date().toString() + " driver.findElement(By.id(\"password\")).sendKeys(password);");
 		driver.findElement(By.id("password")).sendKeys(password);
+		System.out.println(new Date().toString() + " driver.findElement(By.className(\"login-button\")).click();");
 		driver.findElement(By.className("login-button")).click();
 	}
 	public void openMy() {
@@ -111,29 +106,29 @@ public class My extends TestPage {
 
 	@Step("открытие меню RedConnect")
 	public void openRedConnectMenu() {
-		this.wait(BY_REDCONNECT_MENU, 3, "не найден элемент BY_REDCONNECT_MENU");
+		this.waitPresence(BY_REDCONNECT_MENU, "не найден элемент BY_REDCONNECT_MENU");
 		driver.findElement(BY_REDCONNECT_MENU).click();
+		System.out.println(new Date().toString() + " driver.findElement(BY_REDCONNECT_MENU).click();");
 	}
 
 	@Step("установка free-тарифа")
 	public void setFreeTariff() {
-		this.wait(BY_FREE_TARIFF);
+		this.waitElementVisibility(BY_FREE_TARIFF);
 		driver.findElement(BY_FREE_TARIFF).click();
 	}
 
 	@Step("установка business-тарифа")
 	public void setBusinessTariff() {
-		this.wait(BY_BUSINESS_TARIFF, 10, "не найден элемент BY_BUSINESS_TARIFF");
+		this.waitPresence(BY_BUSINESS_TARIFF, "не найден элемент BY_BUSINESS_TARIFF");
 		driver.findElement(BY_BUSINESS_TARIFF).click();
+		System.out.println(new Date().toString() + " driver.findElement(BY_BUSINESS_TARIFF).click();");
 	}
 
 	@Step("удаление операторов")
 	public void deleteOperators() {
 
-		// ожидание для тестовой среды
-
-		this.wait(BY_REDCONNECT_MENU, "не найден элемент BY_REDCONNECT_MENU");
-		driver.findElement(BY_REDCONNECT_MENU).click();
+		//this.waitElementVisibility(BY_REDCONNECT_MENU, "не найден элемент BY_REDCONNECT_MENU");
+		//driver.findElement(BY_REDCONNECT_MENU).click();
 
 		for (; ; ) {
 			try {
@@ -143,17 +138,20 @@ public class My extends TestPage {
 				break;
 			}
 		}
+
+
 	}
 
 	@Step("установка оператора")
 	public void setOperator(RCOperator operator) {
 
-		this.wait(BY_ADD_NUMBER, 5, "не найден BY_ADD_NUMBER");
+		this.waitPresence(BY_ADD_NUMBER, "не найден BY_ADD_NUMBER");
 		driver.findElement(BY_ADD_NUMBER).click();
 
-		this.wait(BY_NUMBER_IMPUT, "не найден BY_NUMBER_IMPUT");
+		//this.waitPresence(BY_NUMBER_IMPUT, "не найден BY_NUMBER_IMPUT");
 		driver.findElement(BY_NUMBER_IMPUT).sendKeys(operator.number);
 
+		//this.waitPresence(BY_ADD_WORK_TIME, "не найден BY_ADD_WORK_TIME");
 		driver.findElement(BY_ADD_WORK_TIME).click();
 
 		WebElement timeStartElement = driver.findElement(BY_START_WORK_TIME);

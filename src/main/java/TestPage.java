@@ -1,16 +1,11 @@
 import org.openqa.selenium.*;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.edge.EdgeDriver;
+import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.firefox.FirefoxProfile;
-import org.openqa.selenium.opera.OperaDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import org.testng.annotations.Test;
 import ru.yandex.qatools.allure.annotations.Step;
 
-import java.util.concurrent.TimeUnit;
-import java.util.logging.Level;
+import java.util.concurrent.*;
 
 import static org.testng.Assert.fail;
 
@@ -57,8 +52,33 @@ public class TestPage {
 
 
 	//Ожидания элементов-----------------------------------------------------------------------------------
-	@Step("ожидание элемента")
-	public void wait(By byElement, int seconds, String failText) {
+
+	@Step("Ожидание элемента")
+	public void waitPresence(By byElement, int seconds, String failText) {
+		try {
+			WebElement dynamicElement = (new WebDriverWait(driver, seconds))
+					.until(ExpectedConditions.presenceOfElementLocated(byElement));
+		} catch (TimeoutException e) {
+			fail(failText);
+		} catch (NoSuchElementException e) {
+			fail(failText);
+		}
+	}
+	@Step("Ожидание элемента")
+	public void waitPresence(By byElement, String failText) {
+		this.waitPresence(byElement, 20, failText);
+	}
+	@Step("Ожидание элемента")
+	public void waitPresence(By byElement, int seconds) {
+		this.waitPresence(byElement, seconds, "элемент не найден");
+	}
+	@Step("Ожидание элемента")
+	public void waitPresence(By byElement) {
+		this.waitPresence(byElement, 20, "элемент не найден");
+	}
+	//-----------------------------------------------------------------------------------------------------
+	@Step("ожидание видимости элемента")
+	public void waitElementVisibility(By byElement, int seconds, String failText) {
 		try {
 			(new WebDriverWait(driver, seconds)).until(ExpectedConditions.visibilityOf(driver.findElement(byElement)));
 		} catch (TimeoutException e) {
@@ -67,17 +87,17 @@ public class TestPage {
 			fail(failText);
 		}
 	}
-	@Step("ожидание элемента")
-	public void wait(By byElement, String failText) {
-		this.wait(byElement, 10, failText);
+	@Step("ожидание видимости элемента")
+	public void waitElementVisibility(By byElement, String failText) {
+		this.waitElementVisibility(byElement, 20, failText);
 	}
-	@Step("ожидание элемента")
-	public void wait(By byElement, int seconds) {
-		this.wait(byElement, seconds, "элемент не найден");
+	@Step("ожидание видимости элемента")
+	public void waitElementVisibility(By byElement, int seconds) {
+		this.waitElementVisibility(byElement, seconds, "элемент не найден");
 	}
-	@Step("ожидание элемента")
-	public void wait(By byElement) {
-		this.wait(byElement, 10, "элемент не найден");
+	@Step("ожидание видимости элемента")
+	public void waitElementVisibility(By byElement) {
+		this.waitElementVisibility(byElement, 20, "элемент не найден");
 	}
 //---------------------------------------------------------------------------------------------------------
 
