@@ -12,25 +12,25 @@ import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 public class RHWidgetPage extends TestPage {
-	//variables
 
+	//variables
 	Thread botThread1;
 	Thread botThread2;
-	WebDriver driver;
 	WebElement rhIFrame;
+
 	XMPPBot bot1 = new XMPPBot("krupeninadmin", "qweasd", "xmpp.redhelper.ru", "xmpp.redhelper.ru", 5222);
 	XMPPBot bot2 = new XMPPBot("krupenin", "qweasd", "xmpp.redhelper.ru", "xmpp.redhelper.ru", 5222);
-	public static List<String> messages = Arrays.asList("Сообщение",
-														"Привет",
-														"Hello",
-														"1234123412341234");
 
+	public static List<String> messages = Arrays.asList("Сообщение",
+			"Привет",
+			"Hello",
+			"1234123412341234");
 
 
 	public void sendMessagesVisitorToOperator() throws InterruptedException {
 
 		FirefoxProfile firefoxProfile = new FirefoxProfile();
-		firefoxProfile.setPreference("browser.private.browsing.autostart",true);
+		firefoxProfile.setPreference("browser.private.browsing.autostart", true);
 
 		driver = new FirefoxDriver();
 
