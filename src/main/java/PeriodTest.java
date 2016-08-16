@@ -10,6 +10,8 @@ import java.util.concurrent.TimeUnit;
 public class PeriodTest {
 	public static void main(String[] args) throws InterruptedException {
 
+		EmailSender.sendEmail("a.g.krupen@yandex.ru", "НАЧАЛО");
+
 		Runnable task1, task2, task3, task4;
 
 		//оператор недоступен
@@ -24,6 +26,7 @@ public class PeriodTest {
 				}
 			} catch (Exception e) {
 				System.err.println(new Date().toString() + " " + e);
+				EmailSender.sendEmail("a.g.krupen@yandex.ru", "ХУЕВАЯ ERROR");
 			}
 		};
 
@@ -43,6 +46,7 @@ public class PeriodTest {
 				}
 			} catch (Exception e) {
 				System.err.println(new Date().toString() + " " + e);
+				EmailSender.sendEmail("a.g.krupen@yandex.ru", "ERROR");
 			}
 		};
 
@@ -58,6 +62,7 @@ public class PeriodTest {
 				}
 			} catch (Exception e) {
 				System.err.println(new Date().toString() + " " + e);
+				EmailSender.sendEmail("a.g.krupen@yandex.ru", "ХУЕВАЯ ERROR");
 			}
 		};
 
@@ -72,6 +77,7 @@ public class PeriodTest {
 				}
 			} catch (InterruptedException e) {
 				System.err.println(new Date().toString() + " " + e);
+				EmailSender.sendEmail("a.g.krupen@yandex.ru", "ХУЕВАЯ ERROR");
 			}
 		};
 //--------------------------------------------------------------------------------------------------
@@ -112,7 +118,7 @@ public class PeriodTest {
 				System.err.println("ОШИБКА: Файл свойств отсуствует!");
 			}
 
-			RCWidgetPage rcWidgetPage = new RCWidgetPage(DriverFactory.getDriver(DriverFactory.BrowserType.FIREFOX));
+			RCWidgetPage rcWidgetPage = new RCWidgetPage(DriverFactory.getDriver(DriverFactory.BrowserType.PHANTOMJS));
 			rcWidgetPage.manage(5, 5);
 			rcWidgetPage.deleteAllCookies();
 			rcWidgetPage.openSite(site);

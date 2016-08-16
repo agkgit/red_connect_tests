@@ -15,15 +15,18 @@ import java.util.Properties;
 
 import static org.testng.Assert.fail;
 
-
-
 public class My extends TestPage {
 
 	// константы типа By
 	public final By		BY_DELETE_PHONE,		BY_DO_DELETE_PHONE_YES,		BY_ADD_NUMBER,
 						BY_NUMBER_IMPUT,		BY_ADD_WORK_TIME,			BY_START_WORK_TIME,
 						BY_STOP_WORK_TIME,		BY_SAVE_SETTINGS,			BY_REDCONNECT_MENU,
-						BY_BUSINESS_TARIFF,		BY_FREE_TARIFF;
+						BY_REDHELPER_MENU,		BY_BUSINESS_TARIFF,			BY_FREE_TARIFF,
+
+						//подменю RedHelper
+						BY_REDHELPER_MENU_SETUP,			BY_REDHELPER_MENU_INTERFACE,	BY_REDHELPER_MENU_AGENTS,
+						BY_REDHELPER_MENU_DEP_AND_SITES,	BY_REDHELPER_MENU_STATISTICS,	BY_REDHELPER_MENU_BUY;
+
 
 	String login, password;
 	String urlMy;
@@ -58,6 +61,14 @@ public class My extends TestPage {
 		BY_REDCONNECT_MENU		= By.xpath( property.getProperty("BY_REDCONNECT_MENU") );
 		BY_BUSINESS_TARIFF		= By.xpath( property.getProperty("BY_BUSINESS_TARIFF") );
 		BY_FREE_TARIFF			= By.xpath( property.getProperty("BY_FREE_TARIFF") );
+
+		BY_REDHELPER_MENU				= By.xpath( property.getProperty("BY_REDHELPER_MENU") );
+		BY_REDHELPER_MENU_SETUP			= By.xpath( property.getProperty("BY_REDHELPER_MENU_SETUP") );
+		BY_REDHELPER_MENU_INTERFACE		= By.xpath( property.getProperty("BY_REDHELPER_MENU_INTERFACE") );
+		BY_REDHELPER_MENU_AGENTS		= By.xpath( property.getProperty("BY_REDHELPER_MENU_AGENTS") );
+		BY_REDHELPER_MENU_DEP_AND_SITES	= By.xpath( property.getProperty("BY_REDHELPER_MENU_DEP_AND_SITES") );
+		BY_REDHELPER_MENU_STATISTICS	= By.xpath( property.getProperty("BY_REDHELPER_MENU_STATISTICS") );
+		BY_REDHELPER_MENU_BUY			= By.xpath( property.getProperty("BY_REDHELPER_MENU_BUY") );
 
 		//в зависимости от среды
 		if (isTestEnvironment) {
@@ -104,11 +115,57 @@ public class My extends TestPage {
 		this.openMy(this.login, this.password);
 	}
 
+
+//RedHelper-----------------------------------------------------------------------------------------
+	@Step("открытие меню RedHelper")
+	public void openRedHelperMenu() {
+		this.waitPresence(BY_REDHELPER_MENU, "не найден элемент BY_REDHELPER_MENU");
+		driver.findElement(BY_REDHELPER_MENU).click();
+	}
+
+	@Step("открытие подменю Настройки")
+	public void openRHSetup() {
+		this.waitPresence(BY_REDHELPER_MENU_SETUP, "не найден элемент BY_REDHELPER_MENU_SETUP");
+		driver.findElement(BY_REDHELPER_MENU_SETUP).click();
+	}
+
+	@Step("открытие подменю Внешний вид")
+	public void openRHInterface() {
+		this.waitPresence(BY_REDHELPER_MENU_INTERFACE, "не найден элемент BY_REDHELPER_MENU_INTERFACE");
+		driver.findElement(BY_REDHELPER_MENU_INTERFACE).click();
+	}
+
+	@Step("открытие подменю Операторы")
+	public void openRHAgents() {
+		this.waitPresence(BY_REDHELPER_MENU_AGENTS, "не найден элемент BY_REDHELPER_MENU_AGENTS");
+		driver.findElement(BY_REDHELPER_MENU_AGENTS).click();
+	}
+
+	@Step("открытие подменю Отделы и сайты")
+	public void openRHDepartaments() {
+		this.waitPresence(BY_REDHELPER_MENU_DEP_AND_SITES, "не найден элемент BY_REDHELPER_MENU_DEP_AND_SITES");
+		driver.findElement(BY_REDHELPER_MENU_DEP_AND_SITES).click();
+	}
+
+	@Step("открытие подменю Статистика")
+	public void openRHStatistics() {
+		this.waitPresence(BY_REDHELPER_MENU_STATISTICS, "не найден элемент BY_REDHELPER_MENU_STATISTICS");
+		driver.findElement(BY_REDHELPER_MENU_STATISTICS).click();
+	}
+
+	@Step("открытие подменю Оплата")
+	public void openRHBuy() {
+		this.waitPresence(BY_REDHELPER_MENU_BUY, "не найден элемент BY_REDHELPER_MENU_BUY");
+		driver.findElement(BY_REDHELPER_MENU_BUY).click();
+	}
+
+//--------------------------------------------------------------------------------------------------
+
+//RedConnect----------------------------------------------------------------------------------------
 	@Step("открытие меню RedConnect")
 	public void openRedConnectMenu() {
 		this.waitPresence(BY_REDCONNECT_MENU, "не найден элемент BY_REDCONNECT_MENU");
 		driver.findElement(BY_REDCONNECT_MENU).click();
-		System.out.println(new Date().toString() + " driver.findElement(BY_REDCONNECT_MENU).click();");
 	}
 
 	@Step("установка free-тарифа")
@@ -203,5 +260,6 @@ public class My extends TestPage {
 			i += 3;
 		}
 	}
+//--------------------------------------------------------------------------------------------------
 
 }
