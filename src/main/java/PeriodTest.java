@@ -91,7 +91,10 @@ public class PeriodTest {
 
 
 	//установка оператора для testRC()
-	private static void setOperatorForTestRC(DriverFactory.BrowserType browser, String login, String password, RCOperator operator) {
+	private static void setOperatorForTestRC(DriverFactory.BrowserType browser,
+											 String login,
+											 String password,
+											 RCOperator operator) {
 		//WebDriver driver = DriverFactory.getDriver(DriverFactory.BrowserType.PHANTOMJS);
 		WebDriver driver = DriverFactory.getDriver(browser);
 		My cabinet = new My(driver, true);
@@ -105,7 +108,9 @@ public class PeriodTest {
 	}
 
 	//тест сервиса RedConnect
-	private static void testRC(String site, String number, Boolean isOperatorAvailable, Boolean isVisitorAvailable) throws Exception {
+	private static void testRC(String site, String number,
+							   Boolean isOperatorAvailable,
+							   Boolean isVisitorAvailable) throws Exception {
 
 		try {
 
@@ -138,3 +143,4 @@ public class PeriodTest {
 	}
 
 }
+;
